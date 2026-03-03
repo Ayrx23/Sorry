@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Ashnna ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#0f0f0f;
+  color:white;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  overflow:hidden;
+  transition:0.6s;
+}
+
+.container{
+  padding:20px;
+  width:100%;
+  max-width:420px;
+}
+
+h1{
+  font-weight:500;
+  margin-bottom:20px;
+}
+
+button{
+  padding:14px 20px;
+  margin:10px;
+  border:none;
+  border-radius:14px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.primary{
+  background:#ff4d6d;
+  color:white;
+}
+
+.secondary{
+  background:white;
+  color:#333;
+}
+
+button:active{
+  transform:scale(0.95);
+}
+
+.hidden{
+  display:none;
+}
+
+.cursor{
+  border-right:2px solid #ff4d6d;
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+  0%,100%{border-color:transparent;}
+  50%{border-color:#ff4d6d;}
+}
+
+.fade{
+  animation:fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container fade" id="page1">
+  <h1 id="typing"></h1>
+  <p style="margin-bottom:20px;">I know I messed up...</p>
+  <button class="primary" onclick="goToPage2()">Click only if you're still mad</button>
+</div>
+
+<div class="container hidden" id="page2">
+  <h1>Be honest...</h1>
+  <p style="margin-bottom:20px;">How mad are you?</p>
+
+  <button class="secondary" onclick="moveButton(this)">Very mad 😤</button>
+  <button class="secondary" onclick="moveButton(this)">Extremely mad 😡</button>
+  <button class="secondary" onclick="shrinkButton(this)">Little mad 😒</button>
+  <button class="primary" onclick="goToPage3()">Just hurt 🥺</button>
+</div>
+
+<div class="container hidden" id="page3">
+  <h1>That hurts me too...</h1>
+  <p style="margin:20px 0;">
+    I'm not sorry because you're upset. <br><br>
+    I'm sorry because I understand what I did.<br><br>
+    I should not have hurted you.<br><br>
+    It was wrong and I realize that now.<br><br>
+    I promise to do better.
+  </p>
+  <button class="primary" onclick="goToFinal()">Continue ❤️</button>
+</div>
+
+<div class="container hidden" id="page4">
+  <h1>Will you still accept me as your boyfriend?</h1>
+  <button class="primary" onclick="accepted()">Yes ❤️</button>
+  <button class="secondary" id="noBtn" onclick="moveNo()">No 😶</button>
+</div>
+
+<script>
+
+// Typing Effect
+const text = "Ashnna Jaiswal ❤️";
+let index = 0;
+
+function typeEffect(){
+  if(index < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeEffect, 100);
+  }
+}
+
+typeEffect();
+
+// Navigation
+function goToPage2(){
+  document.getElementById("page1").classList.add("hidden");
+  document.getElementById("page2").classList.remove("hidden");
+}
+
+function goToPage3(){
+  document.body.style.background="#2b2b2b";
+  document.getElementById("page2").classList.add("hidden");
+  document.getElementById("page3").classList.remove("hidden");
+}
+
+function goToFinal(){
+  document.body.style.background="#1a1a1a";
+  document.getElementById("page3").classList.add("hidden");
+  document.getElementById("page4").classList.remove("hidden");
+}
+
+// Button Effects
+function moveButton(btn){
+  btn.style.position="absolute";
+  btn.style.top=Math.random()*70+"%";
+  btn.style.left=Math.random()*70+"%";
+}
+
+function shrinkButton(btn){
+  btn.style.transform="scale(0.7)";
+}
+
+// Moving No Button
+function moveNo(){
+  const btn = document.getElementById("noBtn");
+  btn.style.position="absolute";
+  btn.style.top=Math.random()*80+"%";
+  btn.style.left=Math.random()*80+"%";
+}
+
+// Final Message
+function accepted(){
+  document.body.innerHTML="<h1 style='color:#ff4d6d;'>Thank you for choosing me again ❤️</h1>";
+}
+
+</script>
+
+</body>
+  </html>
