@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Ashnna ❤️</title>
 
@@ -21,46 +20,56 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-text-align:center;
-color:white;
 overflow:hidden;
 background:linear-gradient(270deg,#ff4d6d,#8a2be2,#1e90ff);
 background-size:600% 600%;
-animation:bgMove 12s ease infinite;
+animation:bg 12s infinite;
+color:white;
 }
 
-@keyframes bgMove{
+@keyframes bg{
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
 }
 
-.container{
-width:90%;
+.app{
+width:95%;
 max-width:420px;
-padding:25px;
+height:85vh;
 background:rgba(0,0,0,0.35);
-backdrop-filter:blur(10px);
-border-radius:18px;
+backdrop-filter:blur(12px);
+border-radius:20px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
 }
 
-h1{
-margin-bottom:18px;
+.header{
+background:#ff4d6d;
+padding:15px;
+text-align:center;
+font-weight:600;
 }
 
-p{
-line-height:1.5;
-margin-bottom:20px;
+.screen{
+flex:1;
+padding:20px;
+overflow-y:auto;
+text-align:center;
+}
+
+.hidden{
+display:none;
 }
 
 button{
-padding:14px 22px;
-margin:8px;
+padding:12px 18px;
+margin:6px;
 border:none;
-border-radius:12px;
-font-size:16px;
+border-radius:10px;
+font-size:15px;
 cursor:pointer;
-transition:.25s;
 }
 
 .primary{
@@ -73,12 +82,48 @@ background:white;
 color:black;
 }
 
-button:active{
-transform:scale(.9);
+/* typing */
+
+.cursor{
+border-right:2px solid white;
+animation:blink 1s infinite;
 }
 
-.hidden{
-display:none;
+@keyframes blink{
+0%,100%{border-color:transparent}
+50%{border-color:white}
+}
+
+/* whatsapp chat */
+
+.chat{
+text-align:left;
+margin-top:10px;
+}
+
+.msg{
+padding:8px 12px;
+margin:8px 0;
+border-radius:12px;
+max-width:80%;
+font-size:14px;
+}
+
+.me{
+background:#ff4d6d;
+margin-left:auto;
+}
+
+.her{
+background:#333;
+}
+
+/* music */
+
+.music{
+position:absolute;
+top:15px;
+right:15px;
 }
 
 /* hearts */
@@ -95,180 +140,141 @@ animation:float 6s linear infinite;
 100%{transform:translateY(-10vh);opacity:0}
 }
 
-/* chat bubbles */
-
-.chat{
-text-align:left;
-}
-
-.bubble{
-padding:10px 14px;
-border-radius:14px;
-margin:8px 0;
-max-width:80%;
-}
-
-.me{
-background:#ff4d6d;
-margin-left:auto;
-}
-
-.her{
-background:#444;
-}
-
 </style>
 </head>
 
 <body>
 
+<button class="music primary" onclick="toggleMusic()">🎵</button>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2023/03/06/audio_1c9d1c68aa.mp3">
+</audio>
+
 <div id="hearts"></div>
 
-<!-- PAGE 1 -->
+<div class="app">
 
-<div class="container" id="p1">
-<h1 id="typing"></h1>
-<p>I need 30 seconds of your time.</p>
-<button class="primary" onclick="next(1,2)">Tap here Ashnna</button>
-</div>
+<div class="header">For Ashnna ❤️</div>
 
-<!-- PAGE 2 -->
+<!-- VERSION 1 INTRO -->
 
-<div class="container hidden" id="p2">
+<div class="screen" id="s1">
 
-<h1>Be honest...</h1>
-<p>How mad are you?</p>
+<h2 id="typing"></h2>
 
-<button class="secondary" onclick="move(this)">Very mad 😤</button>
-<button class="secondary" onclick="move(this)">Extremely mad 😡</button>
-<button class="secondary" onclick="shrink(this)">Little mad 😒</button>
-<button class="primary" onclick="next(2,3)">Just hurt 🥺</button>
+<p>I made something for you.</p>
+
+<button class="primary" onclick="show('s2')">Continue</button>
 
 </div>
 
-<!-- PAGE 3 CHAT -->
+<!-- VERSION 2 CHOICES -->
 
-<div class="container hidden" id="p3">
+<div class="screen hidden" id="s2">
 
-<h1>Let me explain</h1>
+<h3>How are you feeling?</h3>
 
-<div class="chat">
+<button class="secondary" onclick="startChat('mad')">Still mad 😤</button>
 
-<div class="bubble her">Why did you disappear from Instagram?</div>
+<button class="secondary" onclick="startChat('hurt')">Just hurt 🥺</button>
 
-<div class="bubble me">I thought it would be a funny prank.</div>
-
-<div class="bubble me">But I realized it scared you.</div>
-
-<div class="bubble me">And I hate that I made you feel like that.</div>
-
-<div class="bubble me">You mean a lot to me Ashnna.</div>
-
-<div class="bubble me">I promise I won't do something like that again.</div>
+<button class="secondary" onclick="startChat('curious')">Just curious 🤔</button>
 
 </div>
+
+<!-- VERSION 3 CHAT -->
+
+<div class="screen hidden" id="chatScreen">
+
+<h3>Chat</h3>
+
+<div class="chat" id="chat"></div>
 
 <br>
 
-<button class="primary" onclick="next(3,4)">Continue ❤️</button>
+<button class="primary" onclick="show('final')">Continue</button>
 
 </div>
 
-<!-- FINAL PAGE -->
+<!-- FINAL -->
 
-<div class="container hidden" id="p4">
+<div class="screen hidden" id="final">
 
-<h1>Will you still accept me as your boyfriend?</h1>
+<h3>One last question</h3>
 
-<button class="primary" onclick="yes()">Yes ❤️</button>
-<button class="secondary" id="no">No 😶</button>
+<p>Will you still accept me as your boyfriend?</p>
+
+<button class="primary" onclick="show('yes')">Yes ❤️</button>
+
+<button class="secondary" onclick="show('talk')">Let's talk first</button>
+
+</div>
+
+<div class="screen hidden" id="yes">
+
+<h2>Thank you ❤️</h2>
+
+<p>I promise I'll treat you better.</p>
+
+</div>
+
+<div class="screen hidden" id="talk">
+
+<h3>That's fair</h3>
+
+<p>I'm ready to listen whenever you want.</p>
+
+</div>
 
 </div>
 
 <script>
 
-/* typing name */
+/* navigation */
+
+function show(id){
+
+document.querySelectorAll(".screen").forEach(s=>s.classList.add("hidden"))
+
+document.getElementById(id).classList.remove("hidden")
+
+}
+
+/* typing effect */
 
 const text="Ashnna Jaiswal ❤️"
+
 let i=0
 
 function type(){
+
 if(i<text.length){
+
 document.getElementById("typing").innerHTML+=text.charAt(i)
+
 i++
+
 setTimeout(type,90)
+
 }
+
 }
+
 type()
-
-/* navigation */
-
-function next(a,b){
-document.getElementById("p"+a).classList.add("hidden")
-document.getElementById("p"+b).classList.remove("hidden")
-}
-
-/* button tricks */
-
-function move(btn){
-btn.style.position="absolute"
-btn.style.left=Math.random()*80+"%"
-btn.style.top=Math.random()*80+"%"
-}
-
-function shrink(btn){
-btn.style.transform="scale(.7)"
-}
-
-/* escaping NO button */
-
-const noBtn=document.getElementById("no")
-
-noBtn.addEventListener("mouseover",run)
-noBtn.addEventListener("click",run)
-
-function run(){
-noBtn.style.position="absolute"
-noBtn.style.left=Math.random()*85+"%"
-noBtn.style.top=Math.random()*85+"%"
-}
-
-/* yes confetti */
-
-function yes(){
-
-for(let i=0;i<120;i++){
-const conf=document.createElement("div")
-conf.innerHTML="❤️"
-conf.style.position="absolute"
-conf.style.left=Math.random()*100+"vw"
-conf.style.top="-20px"
-conf.style.fontSize=Math.random()*20+15+"px"
-
-document.body.appendChild(conf)
-
-let fall=setInterval(()=>{
-conf.style.top=(conf.offsetTop+5)+"px"
-if(conf.offsetTop>window.innerHeight){
-conf.remove()
-clearInterval(fall)
-}
-},20)
-}
-
-document.body.innerHTML="<h1 style='text-align:center'>Thank you for choosing me again ❤️</h1>"
-
-}
 
 /* floating hearts */
 
 function heart(){
 
 const h=document.createElement("div")
+
 h.className="heart"
+
 h.innerHTML="❤"
 
 h.style.left=Math.random()*100+"vw"
+
 h.style.fontSize=Math.random()*20+15+"px"
 
 document.body.appendChild(h)
@@ -278,6 +284,100 @@ setTimeout(()=>{h.remove()},6000)
 }
 
 setInterval(heart,500)
+
+/* music */
+
+function toggleMusic(){
+
+const m=document.getElementById("music")
+
+m.paused?m.play():m.pause()
+
+}
+
+/* smart chat */
+
+function startChat(type){
+
+show("chatScreen")
+
+const chat=document.getElementById("chat")
+
+chat.innerHTML=""
+
+let messages=[]
+
+if(type==="mad"){
+
+messages=[
+
+"I know you're probably mad.",
+
+"And honestly I understand why.",
+
+"The prank was stupid.",
+
+"I'm really sorry Ashnna."
+
+]
+
+}
+
+if(type==="hurt"){
+
+messages=[
+
+"I can tell you're hurt.",
+
+"And I hate that I caused that.",
+
+"You matter to me.",
+
+"I won't do something like that again."
+
+]
+
+}
+
+if(type==="curious"){
+
+messages=[
+
+"Okay good you're curious.",
+
+"I made this because you deserve effort.",
+
+"And because I'm genuinely sorry."
+
+]
+
+}
+
+let index=0
+
+function send(){
+
+if(index<messages.length){
+
+const msg=document.createElement("div")
+
+msg.className="msg me"
+
+msg.innerText=messages[index]
+
+chat.appendChild(msg)
+
+index++
+
+setTimeout(send,1200)
+
+}
+
+}
+
+send()
+
+}
 
 </script>
 
