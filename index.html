@@ -4,84 +4,117 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Ashnna ❤️</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
 }
 
 body{
-  background:#0f0f0f;
-  color:white;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  overflow:hidden;
-  transition:0.6s;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+overflow:hidden;
+background:linear-gradient(270deg,#ff4d6d,#8a2be2,#1e90ff);
+background-size:600% 600%;
+animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 
 .container{
-  padding:20px;
-  width:100%;
-  max-width:420px;
+width:90%;
+max-width:420px;
+padding:25px;
+background:rgba(0,0,0,0.35);
+backdrop-filter:blur(10px);
+border-radius:18px;
 }
 
 h1{
-  font-weight:500;
-  margin-bottom:20px;
+margin-bottom:18px;
+}
+
+p{
+line-height:1.5;
+margin-bottom:20px;
 }
 
 button{
-  padding:14px 20px;
-  margin:10px;
-  border:none;
-  border-radius:14px;
-  font-size:16px;
-  cursor:pointer;
-  transition:0.3s;
+padding:14px 22px;
+margin:8px;
+border:none;
+border-radius:12px;
+font-size:16px;
+cursor:pointer;
+transition:.25s;
 }
 
 .primary{
-  background:#ff4d6d;
-  color:white;
+background:#ff4d6d;
+color:white;
 }
 
 .secondary{
-  background:white;
-  color:#333;
+background:white;
+color:black;
 }
 
 button:active{
-  transform:scale(0.95);
+transform:scale(.9);
 }
 
 .hidden{
-  display:none;
+display:none;
 }
 
-.cursor{
-  border-right:2px solid #ff4d6d;
-  animation:blink 1s infinite;
+/* hearts */
+
+.heart{
+position:absolute;
+color:#ff4d6d;
+animation:float 6s linear infinite;
 }
 
-@keyframes blink{
-  0%,100%{border-color:transparent;}
-  50%{border-color:#ff4d6d;}
+@keyframes float{
+0%{transform:translateY(100vh);opacity:0}
+50%{opacity:1}
+100%{transform:translateY(-10vh);opacity:0}
 }
 
-.fade{
-  animation:fadeIn 0.8s ease forwards;
+/* chat bubbles */
+
+.chat{
+text-align:left;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
+.bubble{
+padding:10px 14px;
+border-radius:14px;
+margin:8px 0;
+max-width:80%;
+}
+
+.me{
+background:#ff4d6d;
+margin-left:auto;
+}
+
+.her{
+background:#444;
 }
 
 </style>
@@ -89,99 +122,164 @@ button:active{
 
 <body>
 
-<div class="container fade" id="page1">
-  <h1 id="typing"></h1>
-  <p style="margin-bottom:20px;">I know I messed up...</p>
-  <button class="primary" onclick="goToPage2()">Click only if you're still mad</button>
+<div id="hearts"></div>
+
+<!-- PAGE 1 -->
+
+<div class="container" id="p1">
+<h1 id="typing"></h1>
+<p>I need 30 seconds of your time.</p>
+<button class="primary" onclick="next(1,2)">Tap here Ashnna</button>
 </div>
 
-<div class="container hidden" id="page2">
-  <h1>Be honest...</h1>
-  <p style="margin-bottom:20px;">How mad are you?</p>
+<!-- PAGE 2 -->
 
-  <button class="secondary" onclick="moveButton(this)">Very mad 😤</button>
-  <button class="secondary" onclick="moveButton(this)">Extremely mad 😡</button>
-  <button class="secondary" onclick="shrinkButton(this)">Little mad 😒</button>
-  <button class="primary" onclick="goToPage3()">Just hurt 🥺</button>
+<div class="container hidden" id="p2">
+
+<h1>Be honest...</h1>
+<p>How mad are you?</p>
+
+<button class="secondary" onclick="move(this)">Very mad 😤</button>
+<button class="secondary" onclick="move(this)">Extremely mad 😡</button>
+<button class="secondary" onclick="shrink(this)">Little mad 😒</button>
+<button class="primary" onclick="next(2,3)">Just hurt 🥺</button>
+
 </div>
 
-<div class="container hidden" id="page3">
-  <h1>That hurts me too...</h1>
-  <p style="margin:20px 0;">
-    I'm not sorry because you're upset. <br><br>
-    I'm sorry because I understand what I did.<br><br>
-    I should not have hurted you.<br><br>
-    It was wrong and I realize that now.<br><br>
-    I promise to do better.
-  </p>
-  <button class="primary" onclick="goToFinal()">Continue ❤️</button>
+<!-- PAGE 3 CHAT -->
+
+<div class="container hidden" id="p3">
+
+<h1>Let me explain</h1>
+
+<div class="chat">
+
+<div class="bubble her">Why did you disappear from Instagram?</div>
+
+<div class="bubble me">I thought it would be a funny prank.</div>
+
+<div class="bubble me">But I realized it scared you.</div>
+
+<div class="bubble me">And I hate that I made you feel like that.</div>
+
+<div class="bubble me">You mean a lot to me Ashnna.</div>
+
+<div class="bubble me">I promise I won't do something like that again.</div>
+
 </div>
 
-<div class="container hidden" id="page4">
-  <h1>Will you still accept me as your boyfriend?</h1>
-  <button class="primary" onclick="accepted()">Yes ❤️</button>
-  <button class="secondary" id="noBtn" onclick="moveNo()">No 😶</button>
+<br>
+
+<button class="primary" onclick="next(3,4)">Continue ❤️</button>
+
+</div>
+
+<!-- FINAL PAGE -->
+
+<div class="container hidden" id="p4">
+
+<h1>Will you still accept me as your boyfriend?</h1>
+
+<button class="primary" onclick="yes()">Yes ❤️</button>
+<button class="secondary" id="no">No 😶</button>
+
 </div>
 
 <script>
 
-// Typing Effect
-const text = "Ashnna Jaiswal ❤️";
-let index = 0;
+/* typing name */
 
-function typeEffect(){
-  if(index < text.length){
-    document.getElementById("typing").innerHTML += text.charAt(index);
-    index++;
-    setTimeout(typeEffect, 100);
-  }
+const text="Ashnna Jaiswal ❤️"
+let i=0
+
+function type(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i)
+i++
+setTimeout(type,90)
+}
+}
+type()
+
+/* navigation */
+
+function next(a,b){
+document.getElementById("p"+a).classList.add("hidden")
+document.getElementById("p"+b).classList.remove("hidden")
 }
 
-typeEffect();
+/* button tricks */
 
-// Navigation
-function goToPage2(){
-  document.getElementById("page1").classList.add("hidden");
-  document.getElementById("page2").classList.remove("hidden");
+function move(btn){
+btn.style.position="absolute"
+btn.style.left=Math.random()*80+"%"
+btn.style.top=Math.random()*80+"%"
 }
 
-function goToPage3(){
-  document.body.style.background="#2b2b2b";
-  document.getElementById("page2").classList.add("hidden");
-  document.getElementById("page3").classList.remove("hidden");
+function shrink(btn){
+btn.style.transform="scale(.7)"
 }
 
-function goToFinal(){
-  document.body.style.background="#1a1a1a";
-  document.getElementById("page3").classList.add("hidden");
-  document.getElementById("page4").classList.remove("hidden");
+/* escaping NO button */
+
+const noBtn=document.getElementById("no")
+
+noBtn.addEventListener("mouseover",run)
+noBtn.addEventListener("click",run)
+
+function run(){
+noBtn.style.position="absolute"
+noBtn.style.left=Math.random()*85+"%"
+noBtn.style.top=Math.random()*85+"%"
 }
 
-// Button Effects
-function moveButton(btn){
-  btn.style.position="absolute";
-  btn.style.top=Math.random()*70+"%";
-  btn.style.left=Math.random()*70+"%";
+/* yes confetti */
+
+function yes(){
+
+for(let i=0;i<120;i++){
+const conf=document.createElement("div")
+conf.innerHTML="❤️"
+conf.style.position="absolute"
+conf.style.left=Math.random()*100+"vw"
+conf.style.top="-20px"
+conf.style.fontSize=Math.random()*20+15+"px"
+
+document.body.appendChild(conf)
+
+let fall=setInterval(()=>{
+conf.style.top=(conf.offsetTop+5)+"px"
+if(conf.offsetTop>window.innerHeight){
+conf.remove()
+clearInterval(fall)
+}
+},20)
 }
 
-function shrinkButton(btn){
-  btn.style.transform="scale(0.7)";
+document.body.innerHTML="<h1 style='text-align:center'>Thank you for choosing me again ❤️</h1>"
+
 }
 
-// Moving No Button
-function moveNo(){
-  const btn = document.getElementById("noBtn");
-  btn.style.position="absolute";
-  btn.style.top=Math.random()*80+"%";
-  btn.style.left=Math.random()*80+"%";
+/* floating hearts */
+
+function heart(){
+
+const h=document.createElement("div")
+h.className="heart"
+h.innerHTML="❤"
+
+h.style.left=Math.random()*100+"vw"
+h.style.fontSize=Math.random()*20+15+"px"
+
+document.body.appendChild(h)
+
+setTimeout(()=>{h.remove()},6000)
+
 }
 
-// Final Message
-function accepted(){
-  document.body.innerHTML="<h1 style='color:#ff4d6d;'>Thank you for choosing me again ❤️</h1>";
-}
+setInterval(heart,500)
 
 </script>
 
 </body>
-  </html>
+</html>
